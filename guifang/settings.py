@@ -82,9 +82,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'guifang.pipelines.GuifangPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'guifang.pipelines.GuifangPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -106,3 +106,10 @@ HTTPCACHE_EXPIRATION_SECS = 0
 HTTPCACHE_DIR = 'httpcache'
 HTTPCACHE_IGNORE_HTTP_CODES = []
 HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+MYSQL_HOST = '127.0.0.1'
+MYSQL_DBNAME = 'freego'         #数据库名字，请修改
+MYSQL_USER = 'freego'             #数据库账号，请修改 
+MYSQL_PASSWD = 'freego'         #数据库密码，请修改
+
+MYSQL_PORT = 3306               #数据库端口，在dbhelper中使用

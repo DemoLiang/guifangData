@@ -26,4 +26,5 @@ class GuifangItem(scrapy.Item):
     decoration = scrapy.Field() #装修情况
     facilities = scrapy.Field() #配套设施
     phone = scrapy.Field()  #电话
+    link = scrapy.Field()#链接
     pass
