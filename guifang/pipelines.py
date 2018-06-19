@@ -8,14 +8,12 @@
 import codecs
 import json
 from logging import log
-# import MySQLdb
+import sys
+import pymysql
 
 class GuifangPipeline(object):
-    def __init__(self):
-        # self.dbpool=dbpool
-        print 'a'
     def process_item(self,item,spider):
-        db = connect(host="localhost", user="freego", passwd="freego", db="freego")
+        db = pymysql.connect("localhost", "freego", "freego", "freego")
         c = db.cursor()
         # max_price = 5
         sql ="insert into guifang(id, name, unitPrice, address) VALUES (%s, %s, %s,%s)"
@@ -23,13 +21,14 @@ class GuifangPipeline(object):
         c.execute(sql,params)
         r = c.fetchone()
         print(r)
+        db.close()
         return item
 
 class GuifangPipeline1(object):
     def __init__(self):
         self.file = codecs.open('items.json', 'wb', encoding='utf-8')
-        print 'a'
+        print ('a')
     def process_item(self,item,spider):
         line = json.dumps(dict(item)) + '\n'
-        self.file.write(line.decode("unicode_escape"))  
+        self.file.write(line.decode("unicode_escape"))
         return item 

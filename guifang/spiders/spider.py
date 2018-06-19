@@ -38,12 +38,12 @@ class GuifangSpider(scrapy.Spider):
             item["district"] = self.printhxs(district)
             item["link"] = link
             # print unitPrice,link,name,phone,address
-            print self.printhxs(unitPrice)
-            print link
-            print self.printhxs(name)
-            print self.printhxs(phone)
-            print self.printhxs(district)
-            print address
+            print (self.printhxs(unitPrice))
+            print (link)
+            print (self.printhxs(name))
+            print (self.printhxs(phone))
+            print (self.printhxs(district))
+            print (address)
             #
             req = scrapy.Request(link, callback=self.parse_article,meta=item)
             yield req
@@ -75,9 +75,9 @@ class GuifangSpider(scrapy.Spider):
         item["volumeRate"] = self.printhxs(volumeRate)
         item["decoration"] = self.printhxs(decoration)
         yield item
-        print self.printhxs(facilities)
-        print self.printhxs(developers)
-        print self.printhxs(propertyCompany)
-        print self.printhxs(volumeRate)
-        print self.printhxs(decoration)
+        print (self.printhxs(facilities))
+        print (self.printhxs(developers))
+        print (self.printhxs(propertyCompany))
+        print (self.printhxs(volumeRate))
+        print (self.printhxs(decoration))
 
