@@ -33,9 +33,8 @@ CREATE TABLE `guifang` (
 ```
 
 ## run
-```scrapy crawl guifang
-
+```
+  scrapy crawl guifang
 or
-
-   scrapy crawl guifang -o items.json
+  scrapy crawl guifang -o items.json
 ```
