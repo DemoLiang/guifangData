@@ -27,7 +27,6 @@ class GuifangPipeline(object):
 class GuifangPipeline1(object):
     def __init__(self):
         self.file = codecs.open('items.json', 'wb', encoding='utf-8')
-        print ('a')
     def process_item(self,item,spider):
         line = json.dumps(dict(item)) + '\n'
         self.file.write(line.decode("unicode_escape"))
