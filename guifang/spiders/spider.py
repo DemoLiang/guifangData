@@ -44,21 +44,12 @@ class GuifangSpider(scrapy.Spider):
             print (self.printhxs(phone))
             print (self.printhxs(district))
             # print (address)
-            #
             req = scrapy.Request(link, callback=self.parse_article,meta=item)
             yield req
-            # bodyStr = '%s==>%s==>%s==>%s==>%s'%(name.encode('utf-8'),phone,unitPrice,address,link)
-            # print bodyStr
-            # print sel
-            # print sel
-        # filename = response.url.split("/")[-2]
-        # with open(filename,'wb') as f:
-            # f.write(bodyStr)
-            # yield self.item
-        nextPageUrl = response.xpath('/html/body/div[6]/div/div[1]/div[2]/div/form/a[8]/@href').extract()
+        nextPageUrl = response.xpath("//div[@class='rgpage']/form/a[8]/@href").extract()
         next_url = self.printhxs(nextPageUrl)
         if next_url:
-            self.log('page_url: %s' % nextPageUrl)
+            self.log('page_url: %s' % next_url)
             ## 将 「下一页」的链接传递给自身，并重新分析
             yield scrapy.Request(next_url, callback=self.parse)
     def parse_article(self,response):
@@ -67,19 +58,20 @@ class GuifangSpider(scrapy.Spider):
         developers = response.xpath('/html/body/div[15]/div/ul/li[2]/div/div/div[2]/text()').extract()
         propertyCompany = response.xpath('/html/body/div[15]/div/ul/li[3]/div[1]/div/div[2]/text()').extract()
         volumeRate = response.xpath('/html/body/div[15]/div/ul/li[6]/div/div/div[2]/text()').extract()
-        decoration = response.xpath('/html/body/div[@class="lp-intro"]/div[@class="loupan-xx"]/li[9]/div/div/div[2]/text()').extract()
+        decoration = response.xpath("//div[@class='loupan-xx clearfix']/ul/li[9]/div/div/div[2]/text()").extract()
         address = response.xpath('/html/body/div[10]/div/div[2]/div/dl/dd[1]/text()').extract()
-        # item = GuifangItem()
+
         item["facilities"] = self.printhxs(facilities).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["developers"] = self.printhxs(developers).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["propertyCompany"] = self.printhxs(propertyCompany).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["volumeRate"] =  self.printhxs(volumeRate).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["decoration"] = self.printhxs(decoration).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["address"] = self.printhxs(address).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
-        yield item
+       
         print (self.printhxs(facilities))
         print (self.printhxs(developers))
         print (self.printhxs(propertyCompany))
         print (self.printhxs(volumeRate))
         print (self.printhxs(decoration))
+        yield item
 
