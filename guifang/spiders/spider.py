@@ -54,11 +54,12 @@ class GuifangSpider(scrapy.Spider):
             yield scrapy.Request(next_url, callback=self.parse)
     def parse_article(self,response):
         item = response.meta
-        facilities = response.xpath('/html/body/div[15]/div/ul/li[1]/div[1]/div/div[1]/text()').extract()
-        developers = response.xpath('/html/body/div[15]/div/ul/li[2]/div/div/div[2]/text()').extract()
-        propertyCompany = response.xpath('/html/body/div[15]/div/ul/li[3]/div[1]/div/div[2]/text()').extract()
-        volumeRate = response.xpath('/html/body/div[15]/div/ul/li[6]/div/div/div[2]/text()').extract()
-        decoration = response.xpath("//div[@class='loupan-xx clearfix']/ul/li[9]/div/div/div[2]/text()").extract()
+        sel = response.xpath("//div[@class='loupan-xx clearfix']")
+        facilities = sel.xpath('ul/li[1]/div[1]/div/div[2]/text()[1]').extract()
+        developers = sel.xpath('ul/li[2]/div/div/div[2]/text()').extract()
+        propertyCompany = sel.xpath('ul/li[3]/div[1]/div/div[2]/text()').extract()
+        volumeRate = sel.xpath('ul/li[6]/div/div/div[2]/text()').extract()
+        decoration = sel.xpath("ul/li[9]/div/div/div[2]/text()").extract()
         address = response.xpath('/html/body/div[10]/div/div[2]/div/dl/dd[1]/text()').extract()
 
         item["facilities"] = self.printhxs(facilities).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
@@ -67,11 +68,10 @@ class GuifangSpider(scrapy.Spider):
         item["volumeRate"] =  self.printhxs(volumeRate).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["decoration"] = self.printhxs(decoration).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
         item["address"] = self.printhxs(address).strip().replace("\t" , "").replace("\n" , "").replace("\r\n" , "").replace("\r" , "").strip()
-       
+    
         print (self.printhxs(facilities))
         print (self.printhxs(developers))
         print (self.printhxs(propertyCompany))
         print (self.printhxs(volumeRate))
         print (self.printhxs(decoration))
         yield item
-
