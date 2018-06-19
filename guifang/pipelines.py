@@ -8,7 +8,7 @@
 import codecs
 import json
 from logging import log
-import MySQLdb
+# import MySQLdb
 
 class GuifangPipeline(object):
     def __init__(self):
@@ -24,3 +24,12 @@ class GuifangPipeline(object):
         r = c.fetchone()
         print(r)
         return item
+
+class GuifangPipeline1(object):
+    def __init__(self):
+        self.file = codecs.open('items.json', 'wb', encoding='utf-8')
+        print 'a'
+    def process_item(self,item,spider):
+        line = json.dumps(dict(item)) + '\n'
+        self.file.write(line.decode("unicode_escape"))  
+        return item 

@@ -84,6 +84,7 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
 #    'guifang.pipelines.GuifangPipeline': 300,
+   'guifang.pipelines.GuifangPipeline1': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -113,3 +114,4 @@ MYSQL_USER = 'freego'             #数据库账号，请修改
 MYSQL_PASSWD = 'freego'         #数据库密码，请修改
 
 MYSQL_PORT = 3306               #数据库端口，在dbhelper中使用
+FEED_EXPORT_ENCODING = 'utf-8' 
