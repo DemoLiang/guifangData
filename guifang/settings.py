@@ -33,6 +33,13 @@ USER_AGENTS = [
     "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36"
 ]
+
+
+PROXIES = ['http://121.42.167.160:3128', 'http://175.150.73.220:1133', 'http://27.44.174.129:9999',
+           'http://61.135.217.7:80','http://112.115.57.20:3128','http://122.114.31.177:808','http://111.79.199.254:3389',
+           'http://222.185.23.18:6666','http://116.213.98.6:8080','http://106.56.102.240:8070','http://221.225.50.58:8118'
+]
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'guifang (+http://www.yourdomain.com)'
 
@@ -51,7 +58,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -70,9 +77,9 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'guifang.middlewares.GuifangDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'guifang.middlewares.GuifangDownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -115,3 +122,8 @@ MYSQL_PASSWD = 'freego'         #数据库密码，请修改
 
 MYSQL_PORT = 3306               #数据库端口，在dbhelper中使用
 FEED_EXPORT_ENCODING = 'utf-8' 
+DOWNLOAD_DELAY = 3
+REFERER_ENABLED = True
+
+CHROME_PATH = r''  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找
+CHROME_DRIVER_PATH = r''  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找

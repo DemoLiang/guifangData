@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 
 import scrapy
+import time
+import random
 from guifang.items import GuifangItem
 
 class GuifangSpider(scrapy.Spider):
@@ -15,16 +17,8 @@ class GuifangSpider(scrapy.Spider):
             s = s.join(i.encode('utf-8'))
         return s
     def parse(self,response):
-        # print '*'*20
-        # print response.body
-        item = GuifangItem()
         for sel in response.xpath('/html/body/div[6]/div/div[1]/div[1]/div[2]/div'):
-            # print '*'*50
-            # print sel.extract()
-            # print '*'*50
-            # print sel.xpath("@class").extract()
-            #/html/body/div[6]/div/div[1]/div[1]/div[2]/div[1]/div[2]/h3/a
-            #/html/body/div[6]/div/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/p/span/i
+            item = GuifangItem()
             link = sel.xpath('div[2]/h3/a/@href').extract_first().strip()
             unitPrice = sel.xpath('div[2]/div[1]/h3/span/em/text()').extract()
             name = sel.xpath('div[2]/h3/a/span/text()').extract()
@@ -45,7 +39,10 @@ class GuifangSpider(scrapy.Spider):
             print (self.printhxs(district))
             # print (address)
             req = scrapy.Request(link, callback=self.parse_article,meta=item)
+            time.sleep(random.randint(3, 6))
             yield req
+            # yield item
+        time.sleep(random.randint(3, 6))
         nextPageUrl = response.xpath("//div[@class='rgpage']/form/a[8]/@href").extract()
         next_url = self.printhxs(nextPageUrl)
         if next_url:
@@ -54,7 +51,11 @@ class GuifangSpider(scrapy.Spider):
             yield scrapy.Request(next_url, callback=self.parse)
     def parse_article(self,response):
         item = response.meta
-        sel = response.xpath("//div[@class='loupan-xx clearfix']")
+        print "*"*50
+        print response.body
+        print "*"*50
+        # item = GuifangItem()
+        sel = response.xpath("//body/div[@class='lp-intro w1200']/div[@class='loupan-xx clearfix']")
         facilities = sel.xpath('ul/li[1]/div[1]/div/div[2]/text()[1]').extract()
         developers = sel.xpath('ul/li[2]/div/div/div[2]/text()').extract()
         propertyCompany = sel.xpath('ul/li[3]/div[1]/div/div[2]/text()').extract()

@@ -6,8 +6,12 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from guifang.settings import USER_AGENTS,PROXIES
 import random
-
+from scrapy.http import HtmlResponse
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from settings import *
 
 class GuifangSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -61,7 +65,18 @@ class GuifangDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
+    def __init__(self):
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')  # 设置无界面
+        if CHROME_PATH:
+            options.binary_location = CHROME_PATH
+        if CHROME_DRIVER_PATH:
+            self.driver = webdriver.Chrome(chrome_options=options, executable_path=CHROME_DRIVER_PATH)  # 初始化Chrome驱动
+        else:
+            self.driver = webdriver.Chrome(chrome_options=options)  # 初始化Chrome驱动
 
+    def __del__(self):
+        self.driver.close()
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
@@ -79,12 +94,22 @@ class GuifangDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        ua = random.choice(self.USER_AGENTS)
-        print ua
-        if ua:
-            print('User-Agent:'+ua)
-            request.headers.setdefault('User-Agent', ua)
-        # request.headers.setdefault('User-Agent', random.choice(self.agents))
+        try:
+            print('Chrome driver begin...')
+            self.driver.get(request.url)  # 获取网页链接内容
+            ua = random.choice(USER_AGENTS)
+            print ua
+            if ua:
+                print('User-Agent:' + ua)
+                request.headers.setdefault('User-Agent', ua)
+            # request.headers.setdefault('User-Agent', random.choice(self.agents))
+            # request.meta['proxy'] = random.choice(PROXIES)
+            return HtmlResponse(url=request.url, body=self.driver.page_source, request=request, encoding='utf-8',
+                                status=200)  # 返回HTML数据
+        except TimeoutException:
+            return HtmlResponse(url=request.url, request=request, encoding='utf-8', status=500)
+        finally:
+            print('Chrome driver end...')
 
         return None
 
