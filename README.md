@@ -67,6 +67,7 @@ or
     - https://juejin.im/entry/5adea7aff265da0b7451cc66
     - https://scrapy-chs.readthedocs.io/zh_CN/0.24/intro/tutorial.html
     - https://www.zhidaow.com/post/scrapy-save-as-excel
+    - http://dmcoders.com/2017/08/04/python-scrapy/
 
 ## 感谢
    - veni
