@@ -57,10 +57,16 @@ or
 
 4. 2018/6/20 日测试撸下的数据可以查看items.json文件
 
+5. 增加导出Excel的pipeline的代码，但是必须配置导出编码配置为GBK，否则导出为乱码
+    ```
+    FEED_EXPORT_ENCODING = 'GBK'
+    ```
+
 ## 参考学习
     - https://segmentfault.com/q/1010000006244984
     - https://juejin.im/entry/5adea7aff265da0b7451cc66
     - https://scrapy-chs.readthedocs.io/zh_CN/0.24/intro/tutorial.html
+    - https://www.zhidaow.com/post/scrapy-save-as-excel
 
 ## 感谢
    - veni
