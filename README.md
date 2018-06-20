@@ -55,6 +55,8 @@ or
     - 正常我们处理好基本的UA，IP，和延迟下载，以及渲染，即可解决大部分的问题
     - 这里我处理了基本的UA，IP通过代理测试了一下，频次通过延迟下载参数配置处理，渲染通过chrome headless 模式模拟正常的浏览器渲染
 
+4. 2018/6/20 日测试撸下的数据可以查看items.json文件
+
 ## 参考学习
     - https://segmentfault.com/q/1010000006244984
     - https://juejin.im/entry/5adea7aff265da0b7451cc66
