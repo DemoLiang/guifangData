@@ -61,6 +61,29 @@ or
     ```
     FEED_EXPORT_ENCODING = 'GBK'
     ```
+6. install dep 
+    ```
+    pip install selenium
+    
+    pip install scrapy
+
+    pip install pymysql
+
+    pip install openpyxl
+    
+    install google chrome driver with the url : https://chromedriver.storage.googleapis.com/index.html?path=2.40/
+    
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    yum localinstall google-chrome-stable_current_x86_64.rpm
+    ```
+
+    ```
+    CHROME_PATH = r'/usr/bin/google-chrome'  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找
+    CHROME_DRIVER_PATH = r'/usr/bin/chromedriver'  # 可以指定绝对路径，如果不指定的>话会在$PATH里面查找
+
+    options.add_argument("--no-sandbox");
+    options.add_argument("--disable-dev-shm-usage");
+    ```
 
 ## 参考学习
     - https://segmentfault.com/q/1010000006244984
