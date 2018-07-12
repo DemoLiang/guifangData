@@ -122,8 +122,8 @@ MYSQL_USER = 'freego'             #数据库账号，请修改
 MYSQL_PASSWD = 'freego'         #数据库密码，请修改
 
 MYSQL_PORT = 3306               #数据库端口，在dbhelper中使用
-FEED_EXPORT_ENCODING = 'utf-8'
-# FEED_EXPORT_ENCODING = 'GBK'
+# FEED_EXPORT_ENCODING = 'utf-8'
+FEED_EXPORT_ENCODING = 'GBK'
 DOWNLOAD_DELAY = 3
 REFERER_ENABLED = True
 

@@ -28,3 +28,36 @@ class GuifangItem(scrapy.Item):
     phone = scrapy.Field()  #电话
     link = scrapy.Field()#链接
     pass
+class FcxxhomespiderItem(scrapy.Item):
+    # define the fields for your item here like:
+    XFdistrict = scrapy.Field()   #秀峰区
+    XFTransactionsNumber = scrapy.Field()  #成交套数
+    XFTransactionsArea = scrapy.Field()   #成交面积
+    XFYearOfTransactions = scrapy.Field()   #年度成交套数
+    XFYearOfArea = scrapy.Field()   #年度成交面积
+    
+    DCdistrict = scrapy.Field()   #叠彩区
+    DCTransactionsNumber = scrapy.Field()  #成交套数
+    DCTransactionsArea = scrapy.Field()   #成交面积
+    DCYearOfTransactions = scrapy.Field()   #年度成交套数
+    DCYearOfArea = scrapy.Field()   #年度成交面积
+
+    XSdistrict = scrapy.Field()   #象山
+    XSTransactionsNumber = scrapy.Field()  #成交套数
+    XSTransactionsArea = scrapy.Field()   #成交面积
+    XSYearOfTransactions = scrapy.Field()   #年度成交套数
+    XSYearOfArea = scrapy.Field()   #年度成交面积
+
+    QXdistrict = scrapy.Field()   #七星
+    QXTransactionsNumber = scrapy.Field()  #成交套数
+    QXTransactionsArea = scrapy.Field()   #成交面积
+    QXYearOfTransactions = scrapy.Field()   #年度成交套数
+    QXYearOfArea = scrapy.Field()   #年度成交面积
+
+    YSdistrict = scrapy.Field()   #雁山
+    YSTransactionsNumber = scrapy.Field()  #成交套数
+    YSTransactionsArea = scrapy.Field()   #成交面积
+    YSYearOfTransactions = scrapy.Field()   #年度成交套数
+    YSYearOfArea = scrapy.Field()   #年度成交面积
+
+    pass

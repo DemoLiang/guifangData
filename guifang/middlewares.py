@@ -67,16 +67,24 @@ class GuifangDownloaderMiddleware(object):
     # passed objects.
     def __init__(self):
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')  # 设置无界面
+        # options.add_argument('--headless')  # 设置无界面
+        prefs= {
+            "profile.managed_default_content_settings.images":1,
+            "profile.content_settings.plugin_whitelist.adobe-flash-player":1,
+            "profile.content_settings.exceptions.plugins.*,*.per_resource.adobe-flash-player":1,
+        }
+        options.add_experimental_option('prefs', prefs)
         if CHROME_PATH:
             options.binary_location = CHROME_PATH
         if CHROME_DRIVER_PATH:
             self.driver = webdriver.Chrome(chrome_options=options, executable_path=CHROME_DRIVER_PATH)  # 初始化Chrome驱动
         else:
             self.driver = webdriver.Chrome(chrome_options=options)  # 初始化Chrome驱动
+        pass
 
     def __del__(self):
         self.driver.close()
+        pass
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
