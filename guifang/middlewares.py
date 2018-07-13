@@ -84,9 +84,9 @@ class GuifangDownloaderMiddleware(object):
             self.driver = webdriver.Chrome(chrome_options=options)  # 初始化Chrome驱动
         pass
 
-    # def __del__(self):
-        # self.driver.close()
-        # pass
+    def __del__(self):
+        self.driver.close()
+        pass
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
@@ -119,7 +119,7 @@ class GuifangDownloaderMiddleware(object):
         except TimeoutException:
             return HtmlResponse(url=request.url, request=request, encoding='utf-8', status=500)
         finally:
-            self.driver.close()
+            # self.driver.close()
             print('Chrome driver end...')
 
         return None

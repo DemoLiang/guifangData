@@ -28,16 +28,13 @@ class GuifangPipeline(object):
 
 class GuifangPipeline1(object):
     def __init__(self):
+        filename = 'guifang_%s.json'%(datetime.date.today())
+        self.guifangFile = codecs.open(filename, 'wb', encoding='utf-8')
         pass
     def process_item(self,item,spider):
-        print '*'*50
-        print spider
-        print '*'*50
         if spider.name == "guifang":
-            filename = 'guifang_%s.json'%(datetime.date.today())
-            self.file = codecs.open(filename, 'wb', encoding='utf-8')
             line = json.dumps(dict(item)) + '\n'
-            self.file.write(line.decode("unicode_escape"))
+            self.guifangFile.write(line.decode("unicode_escape"))
         elif spider.name == "FCXXHomeSpider":
             filename = 'FCXXHomeSpider_%s.json'%(datetime.date.today())
             self.file = codecs.open(filename, 'wb', encoding='utf-8')
