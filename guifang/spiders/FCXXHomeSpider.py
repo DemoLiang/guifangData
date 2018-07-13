@@ -6,7 +6,7 @@ from guifang.items import FcxxhomespiderItem
 class FcxxhomespiderSpider(scrapy.Spider):
     name = 'FCXXHomeSpider'
     allowed_domains = ['cxx.glzjxx.com']
-    start_urls = ['http://fcxx.glzjxx.com/website/sale/s_index.html']
+    start_urls = ['http://fcxx.glzjxx.com/Website/index.html']
 
     def printhxs(self,hxs):
         s = ''
