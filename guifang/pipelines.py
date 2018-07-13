@@ -11,6 +11,7 @@ from logging import log
 import sys
 import pymysql
 import datetime
+import time
 from openpyxl import Workbook
 
 class GuifangPipeline(object):
@@ -28,7 +29,7 @@ class GuifangPipeline(object):
 
 class GuifangPipeline1(object):
     def __init__(self):
-        filename = 'guifang_%s.json'%(datetime.date.today())
+        filename = 'guifang_%s_%s.json'%(datetime.date.today(),time.time())
         self.guifangFile = codecs.open(filename, 'wb', encoding='utf-8')
         pass
     def process_item(self,item,spider):
