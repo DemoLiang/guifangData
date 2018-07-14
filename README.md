@@ -34,7 +34,8 @@ CREATE TABLE `guifang` (
 
 ## run
 ```
-  scrapy crawl guifang
+  scrapy crawl guifang  //抓去桂房网的数据
+  scrapy crawl FCXXHomeSpider //抓取桂林房地产信息网二手房交易数据
 or
   scrapy crawl guifang -o items.json
 ```
