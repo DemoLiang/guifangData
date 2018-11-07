@@ -53,6 +53,7 @@ func main(){
 	}
 	log.Printf("dataList:%v",len(dataList))
 	router := gin.Default()
+	router.Static("/",".")
 	router.POST("/query",handler)
 	router.Run(":8888")
 }
@@ -62,22 +63,26 @@ func handler(c *gin.Context){
 	var resp []*Item
 	log.Printf("%v",c.PostForm("unit_price"))
 	unitPrice:=c.PostForm("unit_price")
-	log.Printf("unitPrice:%v",unitPrice)
+	other:=c.PostForm("other")
 	for _,v:=range dataList{
 		log.Printf("v.UnitPrice:%v",v.UnitPrice)
-		if strings.Contains(v.UnitPrice,unitPrice){
-			resp = append(resp,v)
+		if !strings.Contains(v.UnitPrice,unitPrice){
+			continue
 		}
+		bs,_:=json.Marshal(v)
+		if !strings.Contains(string(bs),other){
+			continue
+		}
+		resp = append(resp,v)
+
 	}
 	if len(resp)<=0 {
-		log.Printf("aaaaa")
 		c.JSON(http.StatusOK, struct {
 			Msg string
 		}{
 			Msg:"not find",
 		})
 	}
-	log.Printf("%v",resp)
 	c.JSON(http.StatusOK,resp)
 	return
 }
